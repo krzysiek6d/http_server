@@ -1,0 +1,1 @@
+add_subdirectory(gtest EXCLUDE_FROM_ALL)
