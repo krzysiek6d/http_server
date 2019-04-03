@@ -16,6 +16,7 @@ namespace HTML {
     std::string select(const std::string &name, const std::string &content);
     std::string option(const std::string &value, const std::string &content);
     std::string submitButton(const std::string &text);
+    std::string link(const std::string &address, const std::string &text);
 };
 
 #endif //HTTP_SERVER_HTML_H

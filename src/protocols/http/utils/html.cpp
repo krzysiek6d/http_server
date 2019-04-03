@@ -39,4 +39,8 @@ namespace HTML {
     std::string submitButton(const std::string &text) {
         return R"(<input type="submit" value=")" + text + R"("\>)";
     }
+
+    std::string link(const std::string &address, const std::string &text) {
+        return tag("a", R"(href=")" + address + R"(")", text);
+    }
 };
