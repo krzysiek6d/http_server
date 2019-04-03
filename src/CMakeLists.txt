@@ -8,4 +8,4 @@ set(server_srcs
 
 add_subdirectory(server)
 add_executable(${PROJECT_NAME} ${server_srcs})
-target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} Boost::system)
+target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} ${Boost_SYSTEM_LIBRARY})

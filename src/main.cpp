@@ -42,7 +42,7 @@ private:
           {
             Http([this](const std::string& message){
                   send(message);
-                  });
+                  }, std::string(data_)).handle();
             socket_.close();
           }
         });
