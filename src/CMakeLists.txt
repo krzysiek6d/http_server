@@ -4,8 +4,9 @@ add_library(libServerMain OBJECT
 
 set(server_srcs
     $<TARGET_OBJECTS:libServerMain>
-    $<TARGET_OBJECTS:libServer>)
+    $<TARGET_OBJECTS:libHttp>)
 
-add_subdirectory(server)
+
+add_subdirectory(protocols)
 add_executable(${PROJECT_NAME} ${server_srcs})
 target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} ${Boost_SYSTEM_LIBRARY})

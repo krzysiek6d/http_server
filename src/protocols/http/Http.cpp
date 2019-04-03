@@ -1,35 +1,26 @@
 #include "Http.hpp"
 #include <sstream>
-#include "MainPage.h"
+#include "pages/main/MainPage.h"
 #include <iostream>
 #include <regex>
 
-Http::Http(std::function<void(const std::string&)> sendfunction, const std::string& request):
-    send_{sendfunction},
-    request{request}
+std::string Http::handle(const std::string& request)
 {
-}
-
-void Http::handle()
-{
-    auto path = getPath();
+    auto path = getPath(request);
     if (path=="/favico.ico") {
-        send(http404("<html>hola hola, nie ma takiej strony 404!</html>"));
-        return;
+        return http404("<html>hola hola, nie ma takiej strony 404!</html>");
     }
     if (path=="/") {
-        send(http202(MainPage().getMainPage()));
-        return;
+        return http202(MainPage().getMainPage());
     }
     auto parsedPath = parsePath(path);
     if (isMapOk(parsedPath))
     {
         // todo - execute here what you want
         std::cout << "EXECUTING" << std::endl;
-        send(http202(MainPage().getMainPage()));
-        return;
+        return http202(MainPage().getMainPage());
     }
-    send(http404("<html>hola hola, nie ma takiej strony 404!</html>"));
+    return http404("<html>hola hola, nie ma takiej strony 404!</html>");
 }
 
 std::map<std::string, std::string> Http::parsePath(std::string path)
@@ -45,12 +36,6 @@ std::map<std::string, std::string> Http::parsePath(std::string path)
     }
     return result;
 };
-
-void Http::send(const std::string& message)
-{
-    if (send_)
-        send_(message);
-}
 
 std::string Http::http404(const std::string& html)
 {
@@ -76,7 +61,7 @@ std::string Http::unescape(const std::string& path)
     return std::regex_replace(path, r, "/");
 }
 
-std::string Http::getPath()
+std::string Http::getPath(const std::string& request)
 {
     std::stringstream s(request);
     std::string path;

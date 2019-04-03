@@ -6,7 +6,7 @@ list(LENGTH test_sources test_sources_len)
 if(test_sources_len GREATER 0)
     add_executable(${test_name}
             $<TARGET_OBJECTS:gtest>
-            $<TARGET_OBJECTS:libServer>
+            $<TARGET_OBJECTS:libHttp>
             ${test_sources})
 
     target_link_libraries(
